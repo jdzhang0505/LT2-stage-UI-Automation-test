@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite guice-stage="DEVELOPMENT" verbose="0" name="Failed suite [regression test]">
+  <test thread-count="5" verbose="0" name="Login test1(failed)">
+    <parameter name="browser" value="chrome"/>
+    <parameter name="platform" value="windows"/>
+    <classes>
+      <class name="nopcommerce4.LT2.test.RegisterTest">
+        <methods>
+          <include name="beforeClass"/>
+          <include name="registerTest" invocation-numbers="0"/>
+          <include name="afterClass"/>
+        </methods>
+      </class> <!-- nopcommerce4.LT2.test.RegisterTest -->
+    </classes>
+  </test> <!-- Login test1(failed) -->
+</suite> <!-- Failed suite [regression test] -->
