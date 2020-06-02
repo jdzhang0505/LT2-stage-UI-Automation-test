@@ -21,8 +21,9 @@ public class Screenshots {
 		String fileDir=Contents.ScreenshotsPath;
 		File sourceFile= ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
 		String imagePath=fileDir+fileName;
+		String reportImagePath=Contents.ReportScreenPath+fileName;
 		FileUtils.copyFile(sourceFile, new File(imagePath));
-		return imagePath;
+		return reportImagePath;
 	}
 
 }
