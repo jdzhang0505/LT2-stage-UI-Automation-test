@@ -22,7 +22,7 @@ public class CustomerListener implements ITestListener {
 			String path=Screenshots.getScreenshots(driver,result.getName());
 			String imagepath= exTest.addScreenCapture(path);
 			
-			exTest.log(LogStatus.PASS, result.getName()+"is success", imagepath);
+			exTest.log(LogStatus.PASS, result.getName()+" is success", imagepath);
 			exReport.endTest(exTest);
 			exReport.flush();
 			
