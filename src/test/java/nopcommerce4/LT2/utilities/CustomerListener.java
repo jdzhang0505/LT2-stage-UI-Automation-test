@@ -37,7 +37,7 @@ public class CustomerListener implements ITestListener {
 	}
 
 	public void onTestFailure(ITestResult result) {
-		exTest.log(LogStatus.FAIL, "测试方法执行失败：" + result.getName());
+		exTest.log(LogStatus.FAIL, "test method is failed：" + result.getName());
 		exReport.endTest(exTest);
 		exReport.flush();
 		
