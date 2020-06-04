@@ -13,6 +13,7 @@ import org.testng.annotations.Test;
 
 import nopcommerce4.LT2.pages.BillingaddressPage;
 import nopcommerce4.LT2.pages.CategoryPage;
+import nopcommerce4.LT2.pages.FilterSearchPage;
 import nopcommerce4.LT2.pages.HomePage;
 import nopcommerce4.LT2.pages.LoginPage;
 import nopcommerce4.LT2.pages.OrderCompletePage;
@@ -22,6 +23,7 @@ import nopcommerce4.LT2.pages.PersonalizePage;
 import nopcommerce4.LT2.pages.ProductPage;
 import nopcommerce4.LT2.pages.ShippingMethodPage;
 import nopcommerce4.LT2.pages.ShoppingCartPage;
+import nopcommerce4.LT2.pages.WishlistPage;
 import nopcommerce4.LT2.utilities.Contents;
 import nopcommerce4.LT2.utilities.CustomerListener;
 import nopcommerce4.LT2.utilities.ExcelUtilities;
@@ -30,6 +32,7 @@ import nopcommerce4.LT2.utilities.ExcelUtilities;
 public class PlaceOrderTest extends CommonTest {
 	LoginPage login;
 	HomePage homePage;
+	FilterSearchPage searchPage;
 	CategoryPage categoryPage;
 	ProductPage productPage;
 	PersonalizePage personalizePage;
@@ -39,6 +42,7 @@ public class PlaceOrderTest extends CommonTest {
 	PaymentInfoPage paymentInfoPage;
 	OrderCompletePage orderCompletePage;
 	OrderDetailPage orderDetailPage;
+	WishlistPage wishlistPage;
 	String url;
 
 	@Parameters({ "browser" })
@@ -88,8 +92,20 @@ public class PlaceOrderTest extends CommonTest {
 		}
 	}
 	
+	@Test(enabled = true,  dependsOnMethods = "testLoginUsingProvider")
+	public void testSearchAndToWishlist() {
+		searchPage=homePage.accessSearchPage("RZFS-15B8V-NAVT");
+		searchPage.addToWishlist();
+	}
+	
+	@Test(enabled = true,dependsOnMethods = "testSearchAndToWishlist")
+	public void testRemoveItemInWishlist() {
+		wishlistPage=homePage.accessWishlistPage();
+		wishlistPage.removeFirstItem();
+	}
+	
 
-	@Test(enabled = true, invocationCount=2, dependsOnMethods = "testLoginUsingProvider")
+	@Test(enabled = true, invocationCount=2, dependsOnMethods = "testRemoveItemInWishlist")
 	public void testAddToCart() {
 		categoryPage = homePage.accessBannersPage();
 		productPage = categoryPage.accessProductPage();
@@ -149,9 +165,7 @@ public class PlaceOrderTest extends CommonTest {
 		Boolean result=orderDetailPage.isOrderInformationShown();
 		Assert.assertTrue(result);
 	}
-	
-	
-	
+		
 
 	@AfterClass
 	public void afterClass() throws InterruptedException {
